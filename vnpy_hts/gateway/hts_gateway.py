@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Any, Dict, List, Set
 from datetime import datetime
 from copy import copy
@@ -221,7 +220,7 @@ class HtsGateway(BaseGateway):
         func = self.query_functions.pop(0)
         func()
         self.query_functions.append(func)
-        
+
     def init_query(self) -> None:
         """初始化查询任务"""
         self.count: int = 0
@@ -497,7 +496,7 @@ class HtsTdApi(TdApi):
             gateway_name=self.gateway_name
         )
         self.gateway.on_trade(trade)
-        
+
         # 获取缓存的委托信息
         order: OrderData = self.orders.get(orderid, None)
         if not order:

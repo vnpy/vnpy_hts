@@ -3155,4 +3155,3 @@ DFITCSOPRspModCapitalDistributionRatioField = {
     "accountID": "string",
     "rtnMsg": "string",
 }
-
