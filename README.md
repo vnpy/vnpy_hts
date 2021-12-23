@@ -5,15 +5,18 @@
 </p>
 
 <p align="center">
-    <img src ="https://img.shields.io/badge/version-6.5.1.6-blueviolet.svg"/>
-    <img src ="https://img.shields.io/badge/platform-windows|linux-yellow.svg"/>
+    <img src ="https://img.shields.io/badge/version-1.0.0-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/platform-windows-yellow.svg"/>
     <img src ="https://img.shields.io/badge/python-3.7-blue.svg" />
     <img src ="https://img.shields.io/github/license/vnpy/vnpy.svg?color=orange"/>
 </p>
 
 ## 说明
 
-基于顶点HTS的期权接口封装开发。
+基于顶点HTS的飞创兼容版API接口封装开发，具体版本为：
+
+* 交易：5.1.45.9
+* 行情：5.1.2.0
 
 ## 安装
 
@@ -24,7 +27,6 @@
 ```
 pip install vnpy_hts
 ```
-
 
 或者下载解压后在cmd中运行：
 
@@ -63,4 +65,4 @@ if __name__ == "__main__":
 ```
 ## 连接
 
-连接时请注意，请勿选择用户目录作为VN Trader的运行目录。
+连接时请注意，请勿选择用户目录作为VN Trader的运行目录，否则会导致程序异常退出（已知为HTS行情API的问题）。
