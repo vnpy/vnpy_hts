@@ -1,11 +1,11 @@
-    void TdApi::OnFrontConnected()
+void TdApi::OnFrontConnected()
 {
 	Task task = Task();
 	task.task_name = ONFRONTCONNECTED;
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnFrontDisconnected(int nReason) 
+void TdApi::OnFrontDisconnected(int nReason) 
 {
 	Task task = Task();
 	task.task_name = ONFRONTDISCONNECTED;
@@ -13,7 +13,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRtnNotice(DFITCSECRspNoticeField *pNotice) 
+void TdApi::OnRtnNotice(DFITCSECRspNoticeField *pNotice) 
 {
 	Task task = Task();
 	task.task_name = ONRTNNOTICE;
@@ -26,7 +26,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspError(DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspError(DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPERROR;
@@ -39,7 +39,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockUserLogin(DFITCSECRspUserLoginField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockUserLogin(DFITCSECRspUserLoginField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKUSERLOGIN;
@@ -58,7 +58,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockUserLogout(DFITCSECRspUserLogoutField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockUserLogout(DFITCSECRspUserLogoutField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKUSERLOGOUT;
@@ -77,7 +77,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockUserPasswordUpdate(DFITCSECRspPasswordUpdateField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockUserPasswordUpdate(DFITCSECRspPasswordUpdateField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKUSERPASSWORDUPDATE;
@@ -96,7 +96,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockEntrustOrder(DFITCStockRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockEntrustOrder(DFITCStockRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKENTRUSTORDER;
@@ -115,7 +115,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockWithdrawOrder(DFITCSECRspWithdrawOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockWithdrawOrder(DFITCSECRspWithdrawOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKWITHDRAWORDER;
@@ -134,7 +134,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryEntrustOrder(DFITCStockRspQryEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryEntrustOrder(DFITCStockRspQryEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYENTRUSTORDER;
@@ -154,7 +154,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryRealTimeTrade(DFITCStockRspQryRealTimeTradeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryRealTimeTrade(DFITCStockRspQryRealTimeTradeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYREALTIMETRADE;
@@ -174,7 +174,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQrySerialTrade(DFITCStockRspQrySerialTradeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQrySerialTrade(DFITCStockRspQrySerialTradeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYSERIALTRADE;
@@ -194,7 +194,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryPosition(DFITCStockRspQryPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryPosition(DFITCStockRspQryPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYPOSITION;
@@ -214,7 +214,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryCapitalAccountInfo(DFITCStockRspQryCapitalAccountField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryCapitalAccountInfo(DFITCStockRspQryCapitalAccountField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYCAPITALACCOUNTINFO;
@@ -234,7 +234,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryAccountInfo(DFITCStockRspQryAccountField *pData, DFITCSECRspInfoField *pRspInfo)  
+void TdApi::OnRspStockQryAccountInfo(DFITCStockRspQryAccountField *pData, DFITCSECRspInfoField *pRspInfo)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYACCOUNTINFO;
@@ -253,7 +253,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryShareholderInfo(DFITCStockRspQryShareholderField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
+void TdApi::OnRspStockQryShareholderInfo(DFITCStockRspQryShareholderField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYSHAREHOLDERINFO;
@@ -273,7 +273,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockTransferFunds(DFITCStockRspTransferFundsField *pData,DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockTransferFunds(DFITCStockRspTransferFundsField *pData,DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKTRANSFERFUNDS;
@@ -292,7 +292,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockEntrustBatchOrder(DFITCStockRspEntrustBatchOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockEntrustBatchOrder(DFITCStockRspEntrustBatchOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKENTRUSTBATCHORDER;
@@ -311,7 +311,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockWithdrawBatchOrder(DFITCStockRspWithdrawBatchOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockWithdrawBatchOrder(DFITCStockRspWithdrawBatchOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKWITHDRAWBATCHORDER;
@@ -330,7 +330,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockCalcAbleEntrustQty(DFITCStockRspCalcAbleEntrustQtyField *pData, DFITCSECRspInfoField *pRspInfo)  
+void TdApi::OnRspStockCalcAbleEntrustQty(DFITCStockRspCalcAbleEntrustQtyField *pData, DFITCSECRspInfoField *pRspInfo)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKCALCABLEENTRUSTQTY;
@@ -349,7 +349,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockCalcAblePurchaseETFQty(DFITCStockRspCalcAblePurchaseETFQtyField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockCalcAblePurchaseETFQty(DFITCStockRspCalcAblePurchaseETFQtyField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKCALCABLEPURCHASEETFQTY;
@@ -368,7 +368,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryFreezeFundsDetail(DFITCStockRspQryFreezeFundsDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
+void TdApi::OnRspStockQryFreezeFundsDetail(DFITCStockRspQryFreezeFundsDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYFREEZEFUNDSDETAIL;
@@ -388,7 +388,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryFreezeStockDetail(DFITCStockRspQryFreezeStockDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryFreezeStockDetail(DFITCStockRspQryFreezeStockDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYFREEZESTOCKDETAIL;
@@ -408,7 +408,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryTransferStockDetail(DFITCStockRspQryTransferStockDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryTransferStockDetail(DFITCStockRspQryTransferStockDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYTRANSFERSTOCKDETAIL;
@@ -428,7 +428,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryTransferFundsDetail(DFITCStockRspQryTransferFundsDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryTransferFundsDetail(DFITCStockRspQryTransferFundsDetailField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYTRANSFERFUNDSDETAIL;
@@ -448,7 +448,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryStockInfo(DFITCStockRspQryStockField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryStockInfo(DFITCStockRspQryStockField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYSTOCKINFO;
@@ -468,7 +468,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryStockStaticInfo(DFITCStockRspQryStockStaticField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspStockQryStockStaticInfo(DFITCStockRspQryStockStaticField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYSTOCKSTATICINFO;
@@ -488,7 +488,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspStockQryTradeTime(DFITCStockRspQryTradeTimeField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspStockQryTradeTime(DFITCStockRspQryTradeTimeField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSTOCKQRYTRADETIME;
@@ -507,7 +507,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnStockEntrustOrderRtn(DFITCStockEntrustOrderRtnField * pData)
+void TdApi::OnStockEntrustOrderRtn(DFITCStockEntrustOrderRtnField * pData)
 {
 	Task task = Task();
 	task.task_name = ONSTOCKENTRUSTORDERRTN;
@@ -520,7 +520,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnStockTradeRtn(DFITCStockTradeRtnField * pData)
+void TdApi::OnStockTradeRtn(DFITCStockTradeRtnField * pData)
 {
 	Task task = Task();
 	task.task_name = ONSTOCKTRADERTN;
@@ -533,7 +533,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnStockWithdrawOrderRtn(DFITCStockWithdrawOrderRtnField * pData)
+void TdApi::OnStockWithdrawOrderRtn(DFITCStockWithdrawOrderRtnField * pData)
 {
 	Task task = Task();
 	task.task_name = ONSTOCKWITHDRAWORDERRTN;
@@ -546,7 +546,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPUserLogin(DFITCSECRspUserLoginField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPUserLogin(DFITCSECRspUserLoginField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPUSERLOGIN;
@@ -565,7 +565,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPUserLogout(DFITCSECRspUserLogoutField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPUserLogout(DFITCSECRspUserLogoutField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPUSERLOGOUT;
@@ -584,7 +584,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPUserPasswordUpdate(DFITCSECRspPasswordUpdateField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPUserPasswordUpdate(DFITCSECRspPasswordUpdateField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPUSERPASSWORDUPDATE;
@@ -603,7 +603,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPEntrustOrder(DFITCSOPRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPEntrustOrder(DFITCSOPRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPENTRUSTORDER;
@@ -622,7 +622,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQuoteEntrustOrder(DFITCSOPRspQuoteEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPQuoteEntrustOrder(DFITCSOPRspQuoteEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQUOTEENTRUSTORDER;
@@ -641,7 +641,7 @@
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPGroupSplit(DFITCSOPRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPGroupSplit(DFITCSOPRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPGROUPSPLIT;
@@ -679,7 +679,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryGroupPosition(DFITCSOPRspQryGroupPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryGroupPosition(DFITCSOPRspQryGroupPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYGROUPPOSITION;
@@ -699,7 +699,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPLockOUnLockStock(DFITCSOPRspLockOUnLockStockField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
+void TdApi::OnRspSOPLockOUnLockStock(DFITCSOPRspLockOUnLockStockField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPLOCKOUNLOCKSTOCK;
@@ -719,7 +719,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPWithdrawOrder(DFITCSECRspWithdrawOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPWithdrawOrder(DFITCSECRspWithdrawOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPWITHDRAWORDER;
@@ -738,7 +738,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryEntrustOrder(DFITCSOPRspQryEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryEntrustOrder(DFITCSOPRspQryEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYENTRUSTORDER;
@@ -758,7 +758,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQrySerialTrade(DFITCSOPRspQrySerialTradeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQrySerialTrade(DFITCSOPRspQrySerialTradeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYSERIALTRADE;
@@ -778,7 +778,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryPosition(DFITCSOPRspQryPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryPosition(DFITCSOPRspQryPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYPOSITION;
@@ -798,7 +798,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryCollateralPosition(DFITCSOPRspQryCollateralPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryCollateralPosition(DFITCSOPRspQryCollateralPositionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYCOLLATERALPOSITION;
@@ -818,7 +818,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryCapitalAccountInfo(DFITCSOPRspQryCapitalAccountField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPQryCapitalAccountInfo(DFITCSOPRspQryCapitalAccountField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYCAPITALACCOUNTINFO;
@@ -837,7 +837,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryAccountInfo(DFITCSOPRspQryAccountField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPQryAccountInfo(DFITCSOPRspQryAccountField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYACCOUNTINFO;
@@ -856,7 +856,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryShareholderInfo(DFITCSOPRspQryShareholderField *pData, DFITCSECRspInfoField *pRspInfo)  
+void TdApi::OnRspSOPQryShareholderInfo(DFITCSOPRspQryShareholderField *pData, DFITCSECRspInfoField *pRspInfo)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYSHAREHOLDERINFO;
@@ -875,7 +875,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPCalcAbleEntrustQty(DFITCSOPRspCalcAbleEntrustQtyField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspSOPCalcAbleEntrustQty(DFITCSOPRspCalcAbleEntrustQtyField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPCALCABLEENTRUSTQTY;
@@ -894,7 +894,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryAbleLockStock(DFITCSOPRspQryAbleLockStockField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
+void TdApi::OnRspSOPQryAbleLockStock(DFITCSOPRspQryAbleLockStockField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYABLELOCKSTOCK;
@@ -914,7 +914,7 @@ void TdApi::OnRspSOPGroupExectueOrder(DFITCSOPRspGroupExectueOrderField *pData, 
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryContactInfo(DFITCSOPRspQryContactField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
+void TdApi::OnRspSOPQryContactInfo(DFITCSOPRspQryContactField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast)  
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYCONTACTINFO;
@@ -953,7 +953,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryExecAssiInfo(DFITCSOPRspQryExecAssiInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryExecAssiInfo(DFITCSOPRspQryExecAssiInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYEXECASSIINFO;
@@ -973,7 +973,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryTradeTime(DFITCSOPRspQryTradeTimeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryTradeTime(DFITCSOPRspQryTradeTimeField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYTRADETIME;
@@ -993,7 +993,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryExchangeInfo(DFITCSOPRspQryExchangeInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryExchangeInfo(DFITCSOPRspQryExchangeInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYEXCHANGEINFO;
@@ -1013,7 +1013,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryCommission(DFITCSOPRspQryCommissionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryCommission(DFITCSOPRspQryCommissionField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYCOMMISSION;
@@ -1033,7 +1033,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryDeposit(DFITCSOPRspQryDepositField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryDeposit(DFITCSOPRspQryDepositField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYDEPOSIT;
@@ -1053,7 +1053,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspSOPQryContractObjectInfo(DFITCSOPRspQryContractObjectField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspSOPQryContractObjectInfo(DFITCSOPRspQryContractObjectField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSOPQRYCONTRACTOBJECTINFO;
@@ -1073,7 +1073,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnSOPEntrustOrderRtn(DFITCSOPEntrustOrderRtnField * pData)
+void TdApi::OnSOPEntrustOrderRtn(DFITCSOPEntrustOrderRtnField * pData)
 {
 	Task task = Task();
 	task.task_name = ONSOPENTRUSTORDERRTN;
@@ -1086,7 +1086,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnSOPTradeRtn(DFITCSOPTradeRtnField * pData)
+void TdApi::OnSOPTradeRtn(DFITCSOPTradeRtnField * pData)
 {
 	Task task = Task();
 	task.task_name = ONSOPTRADERTN;
@@ -1099,7 +1099,7 @@ void TdApi::OnRspSOPExectueOrder(DFITCSOPRspExectueOrderField *pData, DFITCSECRs
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnSOPWithdrawOrderRtn(DFITCSOPWithdrawOrderRtnField * pData)
+void TdApi::OnSOPWithdrawOrderRtn(DFITCSOPWithdrawOrderRtnField * pData)
 {
 	Task task = Task();
 	task.task_name = ONSOPWITHDRAWORDERRTN;
@@ -1202,7 +1202,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLUserLogin(DFITCSECRspUserLoginField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLUserLogin(DFITCSECRspUserLoginField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLUSERLOGIN;
@@ -1221,7 +1221,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLUserLogout(DFITCSECRspUserLogoutField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLUserLogout(DFITCSECRspUserLogoutField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLUSERLOGOUT;
@@ -1240,7 +1240,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQryAbleFinInfo(DFITCFASLRspAbleFinInfoField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLQryAbleFinInfo(DFITCFASLRspAbleFinInfoField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYABLEFININFO;
@@ -1259,7 +1259,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQryAbleSloInfo(DFITCFASLRspAbleSloInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspFASLQryAbleSloInfo(DFITCFASLRspAbleSloInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYABLESLOINFO;
@@ -1279,7 +1279,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLTransferCollateral(DFITCFASLRspTransferCollateralField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLTransferCollateral(DFITCFASLRspTransferCollateralField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLTRANSFERCOLLATERAL;
@@ -1298,7 +1298,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLDirectRepayment(DFITCFASLRspDirectRepaymentField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLDirectRepayment(DFITCFASLRspDirectRepaymentField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLDIRECTREPAYMENT;
@@ -1317,7 +1317,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLRepayStockTransfer(DFITCFASLRspRepayStockTransferField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLRepayStockTransfer(DFITCFASLRspRepayStockTransferField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLREPAYSTOCKTRANSFER;
@@ -1336,7 +1336,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLEntrustCrdtOrder(DFITCFASLRspEntrustCrdtOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLEntrustCrdtOrder(DFITCFASLRspEntrustCrdtOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLENTRUSTCRDTORDER;
@@ -1355,7 +1355,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLEntrustOrder(DFITCFASLRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLEntrustOrder(DFITCFASLRspEntrustOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLENTRUSTORDER;
@@ -1374,7 +1374,7 @@ void TdApi::OnRspSOPModCapitalDistributionRatio(DFITCSOPRspModCapitalDistributio
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLCalcAbleEntrustCrdtQty(DFITCFASLRspCalcAbleEntrustCrdtQtyField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLCalcAbleEntrustCrdtQty(DFITCFASLRspCalcAbleEntrustCrdtQtyField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLCALCABLEENTRUSTCRDTQTY;
@@ -1413,7 +1413,7 @@ void TdApi::OnRspFASLQryCrdtFunds(DFITCFASLRspQryCrdtFundsField *pData, DFITCSEC
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQryCrdtContract(DFITCFASLRspQryCrdtContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLat) 
+void TdApi::OnRspFASLQryCrdtContract(DFITCFASLRspQryCrdtContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLat) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYCRDTCONTRACT;
@@ -1433,7 +1433,7 @@ void TdApi::OnRspFASLQryCrdtFunds(DFITCFASLRspQryCrdtFundsField *pData, DFITCSEC
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQryCrdtConChangeInfo(DFITCFASLRspQryCrdtConChangeInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspFASLQryCrdtConChangeInfo(DFITCFASLRspQryCrdtConChangeInfoField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYCRDTCONCHANGEINFO;
@@ -1690,7 +1690,7 @@ void TdApi::OnRspFASLQryTransferFundsDetail(DFITCFASLRspQryTransferFundsDetailFi
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLWithdrawOrder(DFITCFASLRspWithdrawOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLWithdrawOrder(DFITCFASLRspWithdrawOrderField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLWITHDRAWORDER;
@@ -1709,7 +1709,7 @@ void TdApi::OnRspFASLQryTransferFundsDetail(DFITCFASLRspQryTransferFundsDetailFi
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQrySystemTime(DFITCFASLRspQryTradeTimeField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLQrySystemTime(DFITCFASLRspQryTradeTimeField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYSYSTEMTIME;
@@ -1728,7 +1728,7 @@ void TdApi::OnRspFASLQryTransferFundsDetail(DFITCFASLRspQryTransferFundsDetailFi
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQryTransferredContract(DFITCFASLRspQryTransferredContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspFASLQryTransferredContract(DFITCFASLRspQryTransferredContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYTRANSFERREDCONTRACT;
@@ -1748,7 +1748,7 @@ void TdApi::OnRspFASLQryTransferFundsDetail(DFITCFASLRspQryTransferFundsDetailFi
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLDesirableFundsOut(DFITCFASLRspDesirableFundsOutField *pData, DFITCSECRspInfoField *pRspInfo) 
+void TdApi::OnRspFASLDesirableFundsOut(DFITCFASLRspDesirableFundsOutField *pData, DFITCSECRspInfoField *pRspInfo) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLDESIRABLEFUNDSOUT;
@@ -1767,7 +1767,7 @@ void TdApi::OnRspFASLQryTransferFundsDetail(DFITCFASLRspQryTransferFundsDetailFi
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQryGuaranteedContract(DFITCFASLRspQryGuaranteedContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspFASLQryGuaranteedContract(DFITCFASLRspQryGuaranteedContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYGUARANTEEDCONTRACT;
@@ -1787,7 +1787,7 @@ void TdApi::OnRspFASLQryTransferFundsDetail(DFITCFASLRspQryTransferFundsDetailFi
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnRspFASLQryUnderlyingContract(DFITCFASLRspQryUnderlyingContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
+void TdApi::OnRspFASLQryUnderlyingContract(DFITCFASLRspQryUnderlyingContractField *pData, DFITCSECRspInfoField *pRspInfo, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPFASLQRYUNDERLYINGCONTRACT;
@@ -1892,7 +1892,7 @@ void TdApi::OnFASLTradeRtn(DFITCFaslTradeRtnField *pData)
 	this->task_queue.push(task);
 };
 
-    void TdApi::OnFASLWithdrawOrderRtn(DFITCFaslWithdrawOrderRtnField *pData)
+void TdApi::OnFASLWithdrawOrderRtn(DFITCFaslWithdrawOrderRtnField *pData)
 {
 	Task task = Task();
 	task.task_name = ONFASLWITHDRAWORDERRTN;

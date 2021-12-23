@@ -1,5 +1,5 @@
 
-//vnsecmd.cpp : 定义 DLL 应用程序的导出函数。
+//vnhtsmd.cpp : 定义 DLL 应用程序的导出函数。
 //
 #include "vnhtsmd.h"
 
@@ -329,7 +329,6 @@ void MdApi::OnRspUserMDPasswordUpdate(struct DFITCSECRspMDPasswordUpdateField *p
 void MdApi::processTask()
 {
 	try
-
 	{
 		while (this->active)
 		{
