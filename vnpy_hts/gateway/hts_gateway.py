@@ -683,7 +683,7 @@ class HtsTdApi(TdApi):
         self.reqid += 1
         self.localid += 1
 
-        sec_req: dict = {
+        hts_req: dict = {
             "securityID": req.symbol,
             "exchangeID": EXCHANGE_VT2HTS[req.exchange],
             "entrustPrice": req.price,
@@ -691,12 +691,11 @@ class HtsTdApi(TdApi):
             "localOrderID": self.localid,
             "accountID": self.accountid,
             "requestID": self.reqid,
-            "entrustDirection": DIRECTION_VT2HTS[req.direction]
+            "entrustDirection": DIRECTION_VT2HTS[req.direction],
+            "orderType": OPTION_PRICE_TYPE_VT2HTS[req.type],
+            "openCloseFlag": OFFSET_VT2HTS[req.offset]
         }
-
-        sec_req["orderType"] = OPTION_PRICE_TYPE_VT2HTS[req.type]
-        sec_req["openCloseFlag"] = OFFSET_VT2HTS[req.offset]
-        self.reqSOPEntrustOrder(sec_req)
+        self.reqSOPEntrustOrder(hts_req)
 
         localid: str = str(self.localid)
         orderid: str = f"{self.sessionid}_{localid}"
@@ -719,7 +718,7 @@ class HtsTdApi(TdApi):
         """委托撤单"""
         self.reqid += 1
         sessionid, localid = req.orderid.split("_")
-        sec_req: dict = {
+        hts_req: dict = {
             "localOrderID": int(localid),
             "accountID": self.accountid,
             "requestID": self.reqid,
@@ -732,7 +731,7 @@ class HtsTdApi(TdApi):
             self.gateway.write_log("找不到撤单委托")
             return
 
-        self.reqSOPWithdrawOrder(sec_req)
+        self.reqSOPWithdrawOrder(hts_req)
 
     def query_account(self) -> None:
         """查询资金"""

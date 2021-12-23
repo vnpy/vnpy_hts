@@ -41,7 +41,7 @@ from vnpy.event import EventEngine
 from vnpy.trader.engine import MainEngine
 from vnpy.trader.ui import MainWindow, create_qapp
 
-from vnpy_htssec import HtsGateway
+from vnpy_hts import HtsGateway
 
 
 def main():
