@@ -105,6 +105,9 @@ COMPRESS_VT2HTS: Dict[str, int] = {
 # 其他常量
 CHINA_TZ = pytz.timezone("Asia/Shanghai")       # 中国时区
 
+# 合约数据全局缓存字典
+symbol_contract_map: Dict[str, ContractData] = {}
+
 
 class HtsGateway(BaseGateway):
     """
@@ -328,6 +331,10 @@ class HtsMdApi(MdApi):
         tick.ask_volume_3 = data["askQty3"]
         tick.ask_volume_4 = data["askQty4"]
         tick.ask_volume_5 = data["askQty5"]
+
+        contract = symbol_contract_map.get(tick.symbol, None)
+        if contract:
+            tick.name = contract.name
 
         self.gateway.on_tick(tick)
 
@@ -601,6 +608,8 @@ class HtsTdApi(TdApi):
             contract.option_strike, data["contractID"]
         )
 
+        symbol_contract_map[contract.symbol] = contract
+
         self.gateway.on_contract(contract)
 
         if last:
@@ -699,17 +708,9 @@ class HtsTdApi(TdApi):
         localid: str = str(self.localid)
         orderid: str = f"{self.sessionid}_{localid}"
 
-        order: OrderData = OrderData(
-            symbol=req.symbol,
-            exchange=req.exchange,
-            orderid=orderid,
-            price=req.price,
-            volume=req.volume,
-            direction=req.direction,
-            offset=req.offset,
-            gateway_name=self.gateway_name,
-        )
+        order: OrderData = req.create_order_data(orderid, self.gateway_name)
         self.orders[orderid] = order
+        self.gateway.on_order(order)
 
         return order.vt_orderid
 
@@ -717,18 +718,13 @@ class HtsTdApi(TdApi):
         """委托撤单"""
         self.reqid += 1
         sessionid, localid = req.orderid.split("_")
+
         hts_req: dict = {
             "localOrderID": int(localid),
             "accountID": self.accountid,
             "requestID": self.reqid,
             "sessionID": int(sessionid)
         }
-
-        order: OrderData = self.orders.get(req.orderid, None)
-
-        if not order:
-            self.gateway.write_log("找不到撤单委托")
-            return
 
         self.reqSOPWithdrawOrder(hts_req)
 
