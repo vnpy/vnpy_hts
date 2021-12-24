@@ -260,8 +260,10 @@ class HtsMdApi(MdApi):
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
-        self.login_server()
+        self.gateway.write_log(f"行情服务器连接成功")
         self.connect_status = True
+
+        self.login_server()
 
     def onFrontDisconnected(self, reason: int) -> None:
         """服务器连接断开回报"""
@@ -420,8 +422,10 @@ class HtsTdApi(TdApi):
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
-        self.login_server()
+        self.gateway.write_log(f"交易服务器连接成功")
         self.connect_status = True
+
+        self.login_server()
 
     def onFrontDisconnected(self, reason: int) -> None:
         """服务器连接断开回报"""
@@ -502,7 +506,6 @@ class HtsTdApi(TdApi):
             datetime=dt,
             gateway_name=self.gateway_name
         )
-        self.gateway.on_trade(trade)
 
         # 获取缓存的委托信息
         order: OrderData = self.orders.get(orderid, None)
@@ -521,6 +524,7 @@ class HtsTdApi(TdApi):
         order.datetime = trade.datetime
 
         self.gateway.on_order(copy(order))
+        self.gateway.on_trade(trade)
 
         # 更新持仓数据
         if trade.offset == Offset.CLOSE:
@@ -575,7 +579,7 @@ class HtsTdApi(TdApi):
                 dt: datetime = CHINA_TZ.localize(dt)
                 order.datetime = dt
                 order.status = Status.REJECTED
-                self.gateway.on_order(order)
+                self.gateway.on_order(copy(order))
 
                 self.gateway.write_error("期权委托错误", error)
 
@@ -613,8 +617,7 @@ class HtsTdApi(TdApi):
         self.gateway.on_contract(contract)
 
         if last:
-            msg: str = "期权交易合约信息获取完成"
-            self.gateway.write_log(msg)
+            self.gateway.write_log("期权交易合约信息获取成功")
 
     def onRspSOPQryCapitalAccountInfo(self, data: dict, error: dict) -> None:
         """资金查询回报"""
@@ -710,7 +713,7 @@ class HtsTdApi(TdApi):
 
         order: OrderData = req.create_order_data(orderid, self.gateway_name)
         self.orders[orderid] = order
-        self.gateway.on_order(order)
+        self.gateway.on_order(copy(order))
 
         return order.vt_orderid
 

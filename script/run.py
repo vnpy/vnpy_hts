@@ -3,7 +3,7 @@ from vnpy.trader.engine import MainEngine
 from vnpy.trader.ui import MainWindow, create_qapp
 
 from vnpy_hts import HtsGateway
-
+from vnpy_optionmaster import OptionMasterApp
 
 def main():
     """主入口函数"""
@@ -12,6 +12,7 @@ def main():
     event_engine = EventEngine()
     main_engine = MainEngine(event_engine)
     main_engine.add_gateway(HtsGateway)
+    main_engine.add_app(OptionMasterApp)
 
     main_window = MainWindow(main_engine, event_engine)
     main_window.showMaximized()
