@@ -441,7 +441,7 @@ class HtsTdApi(TdApi):
             self.gateway.write_log(f"股票期权交易服务器登录成功")
             self.login_status = True
 
-            self.query_option_contracts()
+            self.query_option_contracts("")
         else:
             self.gateway.write_error("股票期权交易服务器登录失败", error)
 
@@ -590,7 +590,8 @@ class HtsTdApi(TdApi):
 
     def onRspSOPQryContactInfo(self, data: dict, error: dict, last: bool) -> None:
         """合约查询回报"""
-        if not data:
+        if not data["securityOptionID"]:
+            self.gateway.write_log("期权交易合约信息获取成功")
             return
 
         contract: ContractData = ContractData(
@@ -617,7 +618,8 @@ class HtsTdApi(TdApi):
         self.gateway.on_contract(contract)
 
         if last:
-            self.gateway.write_log("期权交易合约信息获取成功")
+            index: str = data["exchangeID"] + data["securityOptionID"]
+            self.query_option_contracts(index)
 
     def onRspSOPQryCapitalAccountInfo(self, data: dict, error: dict) -> None:
         """资金查询回报"""
@@ -749,12 +751,13 @@ class HtsTdApi(TdApi):
         }
         self.reqSOPQryPosition(req)
 
-    def query_option_contracts(self) -> None:
+    def query_option_contracts(self, index: str) -> None:
         """"""
         self.reqid += 1
         req: dict = {
             "requestID": self.reqid,
-            "accountID": self.accountid
+            "accountID": self.accountid,
+            "rowIndex": index
         }
         self.reqSOPQryContactInfo(req)
 
