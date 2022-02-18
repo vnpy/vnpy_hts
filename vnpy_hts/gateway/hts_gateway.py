@@ -114,6 +114,8 @@ class HtsGateway(BaseGateway):
     vn.py用于对接顶点HTS期权柜台的交易接口。
     """
 
+    default_name: str = "HTS"
+
     default_setting: Dict[str, Any] = {
         "账号": "",
         "密码": "",
@@ -128,7 +130,7 @@ class HtsGateway(BaseGateway):
 
     exchanges: List[Exchange] = list(EXCHANGE_VT2HTS.keys())
 
-    def __init__(self, event_engine: EventEngine, gateway_name: str = "HTS") -> None:
+    def __init__(self, event_engine: EventEngine, gateway_name: str) -> None:
         """构造函数"""
         super().__init__(event_engine, gateway_name)
 
