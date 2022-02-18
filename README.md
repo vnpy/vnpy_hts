@@ -7,7 +7,7 @@
 <p align="center">
     <img src ="https://img.shields.io/badge/version-1.0.0-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/platform-windows-yellow.svg"/>
-    <img src ="https://img.shields.io/badge/python-3.7-blue.svg" />
+    <img src ="https://img.shields.io/badge/python-3.7|3.8|3.9|3.10-blue.svg" />
     <img src ="https://img.shields.io/github/license/vnpy/vnpy.svg?color=orange"/>
 </p>
 
@@ -20,7 +20,7 @@
 
 ## 安装
 
-安装需要基于2.9.0版本以上的[VN Studio](https://www.vnpy.com)。
+安装需要基于3.0.0版本以上的[VN Studio](https://www.vnpy.com)。
 
 直接使用pip命令：
 
@@ -31,7 +31,7 @@ pip install vnpy_hts
 或者下载解压后在cmd中运行：
 
 ```
-python setup.py install
+pip install -e .
 ```
 
 由于在安装的同时需要编译C++代码，因此在执行上述命令之前需要去微软[官网](https://my.visualstudio.com/Downloads?q=build%20tools)下载Visual Studio Build Tools。其中工作负荷选择Visual C++生成工具，同时推荐下载2017版。
@@ -65,6 +65,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
 ## 连接
 
 连接时请注意，请勿选择用户目录作为VN Trader的运行目录，否则会导致程序异常退出（已知为HTS行情API的问题）。
