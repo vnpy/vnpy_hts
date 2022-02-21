@@ -111,7 +111,7 @@ symbol_contract_map: Dict[str, ContractData] = {}
 
 class HtsGateway(BaseGateway):
     """
-    vn.py用于对接顶点HTS期权柜台的交易接口。
+    VeighNa用于对接顶点HTS期权柜台的交易接口。
     """
 
     default_name: str = "HTS"
