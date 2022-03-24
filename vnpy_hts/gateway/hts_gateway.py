@@ -336,7 +336,7 @@ class HtsMdApi(MdApi):
         tick.ask_volume_4 = data["askQty4"]
         tick.ask_volume_5 = data["askQty5"]
 
-        contract = symbol_contract_map.get(tick.symbol, None)
+        contract: ContractData = symbol_contract_map.get(tick.symbol, None)
         if contract:
             tick.name = contract.name
 
@@ -412,7 +412,7 @@ class HtsTdApi(TdApi):
         self.auth_code: str = ""
         self.app_id: str = ""
         self.collection_type: int = 1
-        self.positions: dict = {}
+        self.positions: Dict[str, PositionData] = {}
 
         self.sessionid: str = ""
         self.reqid: int = 0
@@ -745,7 +745,7 @@ class HtsTdApi(TdApi):
         self.reqSOPQryCapitalAccountInfo(req)
 
     def query_position(self) -> None:
-        """"""
+        """查询持仓"""
         self.reqid += 1
         req: dict = {
             "requestID": self.reqid,
@@ -754,7 +754,7 @@ class HtsTdApi(TdApi):
         self.reqSOPQryPosition(req)
 
     def query_option_contracts(self, index: str) -> None:
-        """"""
+        """查询合约"""
         self.reqid += 1
         req: dict = {
             "requestID": self.reqid,
