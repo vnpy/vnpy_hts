@@ -27,6 +27,7 @@ from vnpy.trader.object import (
     AccountData
 )
 from vnpy.trader.utility import get_folder_path
+
 from ..api import (
     MdApi,
     TdApi,
@@ -47,6 +48,7 @@ from ..api import (
     DFITCSEC_COMPRESS_TRUE,
     DFITCSEC_COMPRESS_FALSE
 )
+
 
 # 多空方向映射
 DIRECTION_VT2HTS: Dict[Direction, int] = {
