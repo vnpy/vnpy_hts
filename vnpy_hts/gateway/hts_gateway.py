@@ -773,7 +773,7 @@ class HtsTdApi(TdApi):
 
 def get_option_index(strike_price: float, exchange_instrument_id: str) -> str:
     """获取期权索引"""
-    exchange_instrument_id = exchange_instrument_id.replace(" ", "")
+    exchange_instrument_id: str = exchange_instrument_id.replace(" ", "")
 
     if "M" in exchange_instrument_id:
         n: int = exchange_instrument_id.index("M")
