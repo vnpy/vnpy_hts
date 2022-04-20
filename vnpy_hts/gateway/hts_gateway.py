@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List
 from datetime import datetime
 from copy import copy
 import pytz
@@ -27,6 +27,7 @@ from vnpy.trader.object import (
     AccountData
 )
 from vnpy.trader.utility import get_folder_path
+
 from ..api import (
     MdApi,
     TdApi,
@@ -47,6 +48,7 @@ from ..api import (
     DFITCSEC_COMPRESS_TRUE,
     DFITCSEC_COMPRESS_FALSE
 )
+
 
 # 多空方向映射
 DIRECTION_VT2HTS: Dict[Direction, int] = {
@@ -255,14 +257,14 @@ class HtsMdApi(MdApi):
         self.collection_type: int = 1
 
         self.reqid: int = 0
-        self.subscribed: Set = set()
+        self.subscribed: set = set()
 
         self.sse_inited: bool = False
         self.szse_inited: bool = False
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
-        self.gateway.write_log(f"行情服务器连接成功")
+        self.gateway.write_log("行情服务器连接成功")
         self.connect_status = True
 
         self.login_server()
@@ -336,7 +338,7 @@ class HtsMdApi(MdApi):
         tick.ask_volume_4 = data["askQty4"]
         tick.ask_volume_5 = data["askQty5"]
 
-        contract = symbol_contract_map.get(tick.symbol, None)
+        contract: ContractData = symbol_contract_map.get(tick.symbol, None)
         if contract:
             tick.name = contract.name
 
@@ -412,7 +414,7 @@ class HtsTdApi(TdApi):
         self.auth_code: str = ""
         self.app_id: str = ""
         self.collection_type: int = 1
-        self.positions: dict = {}
+        self.positions: Dict[str, PositionData] = {}
 
         self.sessionid: str = ""
         self.reqid: int = 0
@@ -424,7 +426,7 @@ class HtsTdApi(TdApi):
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
-        self.gateway.write_log(f"交易服务器连接成功")
+        self.gateway.write_log("交易服务器连接成功")
         self.connect_status = True
 
         self.login_server()
@@ -440,7 +442,7 @@ class HtsTdApi(TdApi):
         if not error:
             self.sessionid = str(data["sessionID"])
 
-            self.gateway.write_log(f"股票期权交易服务器登录成功")
+            self.gateway.write_log("股票期权交易服务器登录成功")
             self.login_status = True
 
             self.query_option_contracts("")
@@ -651,7 +653,7 @@ class HtsTdApi(TdApi):
         )
         self.gateway.on_position(pos)
 
-        pos_symbol = f"{data['securityOptionID']}_{data['entrustDirection']}"
+        pos_symbol: str = f"{data['securityOptionID']}_{data['entrustDirection']}"
         self.positions[pos_symbol] = pos
 
     def connect(
@@ -745,7 +747,7 @@ class HtsTdApi(TdApi):
         self.reqSOPQryCapitalAccountInfo(req)
 
     def query_position(self) -> None:
-        """"""
+        """查询持仓"""
         self.reqid += 1
         req: dict = {
             "requestID": self.reqid,
@@ -754,7 +756,7 @@ class HtsTdApi(TdApi):
         self.reqSOPQryPosition(req)
 
     def query_option_contracts(self, index: str) -> None:
-        """"""
+        """查询合约"""
         self.reqid += 1
         req: dict = {
             "requestID": self.reqid,
@@ -771,18 +773,18 @@ class HtsTdApi(TdApi):
 
 def get_option_index(strike_price: float, exchange_instrument_id: str) -> str:
     """获取期权索引"""
-    exchange_instrument_id = exchange_instrument_id.replace(" ", "")
+    exchange_instrument_id: str = exchange_instrument_id.replace(" ", "")
 
     if "M" in exchange_instrument_id:
-        n = exchange_instrument_id.index("M")
+        n: int = exchange_instrument_id.index("M")
     elif "A" in exchange_instrument_id:
-        n = exchange_instrument_id.index("A")
+        n: int = exchange_instrument_id.index("A")
     elif "B" in exchange_instrument_id:
-        n = exchange_instrument_id.index("B")
+        n: int = exchange_instrument_id.index("B")
     else:
         return str(strike_price)
 
-    index = exchange_instrument_id[n:]
-    option_index = f"{strike_price:.3f}-{index}"
+    index: str = exchange_instrument_id[n:]
+    option_index: str = f"{strike_price:.3f}-{index}"
 
     return option_index
