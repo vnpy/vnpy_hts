@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 from datetime import datetime
 from copy import copy
-import pytz
 
 from vnpy.event import EventEngine
 from vnpy.trader.event import EVENT_TIMER
@@ -26,7 +25,7 @@ from vnpy.trader.object import (
     PositionData,
     AccountData
 )
-from vnpy.trader.utility import get_folder_path
+from vnpy.trader.utility import get_folder_path, ZoneInfo
 
 from ..api import (
     MdApi,
@@ -105,7 +104,7 @@ COMPRESS_VT2HTS: Dict[str, int] = {
 }
 
 # 其他常量
-CHINA_TZ = pytz.timezone("Asia/Shanghai")       # 中国时区
+CHINA_TZ = ZoneInfo("Asia/Shanghai")       # 中国时区
 
 # 合约数据全局缓存字典
 symbol_contract_map: Dict[str, ContractData] = {}
@@ -298,7 +297,7 @@ class HtsMdApi(MdApi):
         """行情数据推送"""
         timestamp: str = str(data["tradingDay"]) + str(data["updateTime"])
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d%H:%M:%S.%f")
-        dt: datetime = CHINA_TZ.localize(dt)
+        dt: datetime = dt.replace(tzinfo=CHINA_TZ)
 
         tick: TickData = TickData(
             symbol=data["securityID"],
@@ -461,7 +460,7 @@ class HtsTdApi(TdApi):
 
         timestamp: str = str(datetime.date(datetime.now())) + str(data["entrustTime"])
         dt: datetime = datetime.strptime(timestamp, "%Y-%m-%d%H:%M:%S.%f")
-        dt: datetime = CHINA_TZ.localize(dt)
+        dt: datetime = dt.replace(tzinfo=CHINA_TZ)
 
         if orderid in self.orders:
             order: OrderData = self.orders[orderid]
@@ -493,7 +492,7 @@ class HtsTdApi(TdApi):
         """成交数据推送"""
         timestamp: str = str(datetime.date(datetime.now())) + str(data["tradeTime"])
         dt: datetime = datetime.strptime(timestamp, "%Y-%m-%d%H:%M:%S.%f")
-        dt: datetime = CHINA_TZ.localize(dt)
+        dt: datetime = dt.replace(tzinfo=CHINA_TZ)
         localid: str = str(data["localOrderID"])
         sessionid: str = str(data["sessionID"])
         orderid: str = f"{sessionid}_{localid}"
@@ -580,7 +579,7 @@ class HtsTdApi(TdApi):
 
             if order:
                 dt: datetime = datetime.now()
-                dt: datetime = CHINA_TZ.localize(dt)
+                dt: datetime = dt.replace(tzinfo=CHINA_TZ)
                 order.datetime = dt
                 order.status = Status.REJECTED
                 self.gateway.on_order(copy(order))
