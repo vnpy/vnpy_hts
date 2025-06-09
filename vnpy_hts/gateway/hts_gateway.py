@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any
 from datetime import datetime
 from copy import copy
 
@@ -50,47 +50,47 @@ from ..api import (
 
 
 # 多空方向映射
-DIRECTION_VT2HTS: Dict[Direction, int] = {
+DIRECTION_VT2HTS: dict[Direction, int] = {
     Direction.LONG: DFITCSEC_ED_Buy,
     Direction.SHORT: DFITCSEC_ED_Sell
 }
-DIRECTION_HTS2VT: Dict[int, Direction] = {v: k for k, v in DIRECTION_VT2HTS.items()}
+DIRECTION_HTS2VT: dict[int, Direction] = {v: k for k, v in DIRECTION_VT2HTS.items()}
 
 # 委托类型映射
-OPTION_PRICE_TYPE_HTS2VT: Dict[int, OrderType] = {
+OPTION_PRICE_TYPE_HTS2VT: dict[int, OrderType] = {
     DFITCSEC_SOP_LimitPrice: OrderType.LIMIT,
     DFITCSEC_SOP_LastPrice: OrderType.MARKET
 }
-OPTION_PRICE_TYPE_VT2HTS: Dict[OrderType, int] = {v: k for k, v in OPTION_PRICE_TYPE_HTS2VT.items()}
+OPTION_PRICE_TYPE_VT2HTS: dict[OrderType, int] = {v: k for k, v in OPTION_PRICE_TYPE_HTS2VT.items()}
 
 # 开平方向映射
-OFFSET_VT2HTS: Dict[Offset, int] = {
+OFFSET_VT2HTS: dict[Offset, int] = {
     Offset.OPEN: DFITCSEC_OCF_Open,
     Offset.CLOSE: DFITCSEC_OCF_Close,
 }
-OFFSET_HTS2VT: Dict[int, Offset] = {v: k for k, v in OFFSET_VT2HTS.items()}
+OFFSET_HTS2VT: dict[int, Offset] = {v: k for k, v in OFFSET_VT2HTS.items()}
 
 # 交易所映射
-EXCHANGE_HTS2VT: Dict[str, Exchange] = {
+EXCHANGE_HTS2VT: dict[str, Exchange] = {
     DFITCSEC_EI_SH: Exchange.SSE,
     DFITCSEC_EI_SZ: Exchange.SZSE
 }
-EXCHANGE_VT2HTS: Dict[Exchange, str] = {v: k for k, v in EXCHANGE_HTS2VT.items()}
+EXCHANGE_VT2HTS: dict[Exchange, str] = {v: k for k, v in EXCHANGE_HTS2VT.items()}
 
 # 期权类型映射
-OPTION_TYPE_HTS2VT: Dict[int, OptionType] = {
+OPTION_TYPE_HTS2VT: dict[int, OptionType] = {
     DFITCSEC_OT_CALL: OptionType.CALL,
     DFITCSEC_OT_PUT: OptionType.PUT
 }
 
 # 对冲方向映射
-HEDGE_DIRECTION: Dict[int, int] = {
+HEDGE_DIRECTION: dict[int, int] = {
     DFITCSEC_ED_Buy: 2,
     DFITCSEC_ED_Sell: 1
 }
 
 # 采集类型映射
-COLLECTION_TYPE_VT2HTS: Dict[str, int] = {
+COLLECTION_TYPE_VT2HTS: dict[str, int] = {
     "顶点": DFITCSEC_COLLECTTYPE_APEX,
     "恒生": DFITCSEC_COLLECTTYPE_HS,
     "金证": DFITCSEC_COLLECTTYPE_KD,
@@ -98,7 +98,7 @@ COLLECTION_TYPE_VT2HTS: Dict[str, int] = {
 }
 
 # 行情压缩映射
-COMPRESS_VT2HTS: Dict[str, int] = {
+COMPRESS_VT2HTS: dict[str, int] = {
     "Y": DFITCSEC_COMPRESS_TRUE,
     "N": DFITCSEC_COMPRESS_FALSE
 }
@@ -107,7 +107,7 @@ COMPRESS_VT2HTS: Dict[str, int] = {
 CHINA_TZ = ZoneInfo("Asia/Shanghai")       # 中国时区
 
 # 合约数据全局缓存字典
-symbol_contract_map: Dict[str, ContractData] = {}
+symbol_contract_map: dict[str, ContractData] = {}
 
 
 class HtsGateway(BaseGateway):
@@ -117,7 +117,7 @@ class HtsGateway(BaseGateway):
 
     default_name: str = "HTS"
 
-    default_setting: Dict[str, Any] = {
+    default_setting: dict[str, Any] = {
         "账号": "",
         "密码": "",
         "行情地址": "",
@@ -129,14 +129,14 @@ class HtsGateway(BaseGateway):
         "行情压缩": ["N", "Y"],
     }
 
-    exchanges: List[Exchange] = list(EXCHANGE_VT2HTS.keys())
+    exchanges: list[Exchange] = list(EXCHANGE_VT2HTS.keys())
 
     def __init__(self, event_engine: EventEngine, gateway_name: str) -> None:
         """构造函数"""
         super().__init__(event_engine, gateway_name)
 
-        self.md_api: "HtsMdApi" = HtsMdApi(self)
-        self.td_api: "HtsTdApi" = HtsTdApi(self)
+        self.md_api: HtsMdApi = HtsMdApi(self)
+        self.td_api: HtsTdApi = HtsTdApi(self)
 
     def connect(self, setting: dict) -> None:
         """连接交易接口"""
@@ -413,12 +413,12 @@ class HtsTdApi(TdApi):
         self.auth_code: str = ""
         self.app_id: str = ""
         self.collection_type: int = 1
-        self.positions: Dict[str, PositionData] = {}
+        self.positions: dict[str, PositionData] = {}
 
         self.sessionid: str = ""
         self.reqid: int = 0
         self.localid: int = 10000
-        self.orders: Dict[str, OrderData] = {}
+        self.orders: dict[str, OrderData] = {}
 
         self.connect_status: bool = False
         self.login_status: bool = False
