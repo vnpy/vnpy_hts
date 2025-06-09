@@ -52,7 +52,6 @@ api_dir = meson.current_source_dir() / 'vnpy_hts/api'
 
 # 设置include目录
 include_dirs = include_directories(
-  'vnpy_hts/api/include',
   'vnpy_hts/api/include/hts',
   'vnpy_hts/api/vnhts',
   pybind11_include_dir,

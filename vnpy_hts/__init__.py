@@ -26,6 +26,9 @@ import importlib_metadata
 from .gateway import HtsGateway
 
 
+__all__ = ["HtsGateway"]
+
+
 try:
     __version__ = importlib_metadata.version("vnpy_hts")
 except importlib_metadata.PackageNotFoundError:
