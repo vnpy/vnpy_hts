@@ -2,7 +2,7 @@ from typing import Any
 from datetime import datetime
 from copy import copy
 
-from vnpy.event import EventEngine
+from vnpy.event import EventEngine, Event
 from vnpy.trader.event import EVENT_TIMER
 from vnpy.trader.constant import (
     Exchange,
@@ -138,6 +138,8 @@ class HtsGateway(BaseGateway):
         self.md_api: HtsMdApi = HtsMdApi(self)
         self.td_api: HtsTdApi = HtsTdApi(self)
 
+        self.count: int = 0
+
     def connect(self, setting: dict) -> None:
         """连接交易接口"""
         accountid: str = setting["账号"]
@@ -213,10 +215,10 @@ class HtsGateway(BaseGateway):
         """输出错误信息日志"""
         error_id: int = error["errorID"]
         error_msg: str = error["errorMsg"]
-        msg: str = f"{msg}，代码:{error_id}，信息:{error_msg}"
+        msg = f"{msg}，代码:{error_id}，信息:{error_msg}"
         self.write_log(msg)
 
-    def process_timer_event(self, event) -> None:
+    def process_timer_event(self, event: Event) -> None:
         """定时事件处理"""
         self.count += 1
         if self.count < 2:
@@ -229,7 +231,7 @@ class HtsGateway(BaseGateway):
 
     def init_query(self) -> None:
         """初始化查询任务"""
-        self.count: int = 0
+        self.count = 0
         self.query_functions: list = [self.query_account, self.query_position]
         self.event_engine.register(EVENT_TIMER, self.process_timer_event)
 
@@ -297,7 +299,7 @@ class HtsMdApi(MdApi):
         """行情数据推送"""
         timestamp: str = str(data["tradingDay"]) + str(data["updateTime"])
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d%H:%M:%S.%f")
-        dt: datetime = dt.replace(tzinfo=CHINA_TZ)
+        dt = dt.replace(tzinfo=CHINA_TZ)
 
         tick: TickData = TickData(
             symbol=data["securityID"],
@@ -410,7 +412,6 @@ class HtsTdApi(TdApi):
         self.password: str = ""
         self.auth_code: str = ""
         self.compress_flag: int = 0
-        self.auth_code: str = ""
         self.app_id: str = ""
         self.collection_type: int = 1
         self.positions: dict[str, PositionData] = {}
@@ -460,13 +461,13 @@ class HtsTdApi(TdApi):
 
         timestamp: str = str(datetime.date(datetime.now())) + str(data["entrustTime"])
         dt: datetime = datetime.strptime(timestamp, "%Y-%m-%d%H:%M:%S.%f")
-        dt: datetime = dt.replace(tzinfo=CHINA_TZ)
+        dt = dt.replace(tzinfo=CHINA_TZ)
 
         if orderid in self.orders:
             order: OrderData = self.orders[orderid]
             order.datetime = dt
         else:
-            order: OrderData = OrderData(
+            order = OrderData(
                 symbol=data["securityID"],
                 exchange=EXCHANGE_HTS2VT[data["exchangeID"]],
                 orderid=orderid,
@@ -492,7 +493,7 @@ class HtsTdApi(TdApi):
         """成交数据推送"""
         timestamp: str = str(datetime.date(datetime.now())) + str(data["tradeTime"])
         dt: datetime = datetime.strptime(timestamp, "%Y-%m-%d%H:%M:%S.%f")
-        dt: datetime = dt.replace(tzinfo=CHINA_TZ)
+        dt = dt.replace(tzinfo=CHINA_TZ)
         localid: str = str(data["localOrderID"])
         sessionid: str = str(data["sessionID"])
         orderid: str = f"{sessionid}_{localid}"
@@ -551,7 +552,7 @@ class HtsTdApi(TdApi):
         if orderid in self.orders:
             order: OrderData = self.orders[orderid]
         else:
-            order: OrderData = OrderData(
+            order = OrderData(
                 symbol=data["securityID"],
                 exchange=EXCHANGE_HTS2VT[data["exchangeID"]],
                 orderid=orderid,
@@ -579,7 +580,7 @@ class HtsTdApi(TdApi):
 
             if order:
                 dt: datetime = datetime.now()
-                dt: datetime = dt.replace(tzinfo=CHINA_TZ)
+                dt = dt.replace(tzinfo=CHINA_TZ)
                 order.datetime = dt
                 order.status = Status.REJECTED
                 self.gateway.on_order(copy(order))
@@ -720,7 +721,8 @@ class HtsTdApi(TdApi):
         self.orders[orderid] = order
         self.gateway.on_order(copy(order))
 
-        return order.vt_orderid
+        vt_orderid: str = order.vt_orderid
+        return vt_orderid
 
     def cancel_order(self, req: CancelRequest) -> None:
         """委托撤单"""
@@ -772,14 +774,14 @@ class HtsTdApi(TdApi):
 
 def get_option_index(strike_price: float, exchange_instrument_id: str) -> str:
     """获取期权索引"""
-    exchange_instrument_id: str = exchange_instrument_id.replace(" ", "")
+    exchange_instrument_id = exchange_instrument_id.replace(" ", "")
 
     if "M" in exchange_instrument_id:
         n: int = exchange_instrument_id.index("M")
     elif "A" in exchange_instrument_id:
-        n: int = exchange_instrument_id.index("A")
+        n = exchange_instrument_id.index("A")
     elif "B" in exchange_instrument_id:
-        n: int = exchange_instrument_id.index("B")
+        n = exchange_instrument_id.index("B")
     else:
         return str(strike_price)
 
