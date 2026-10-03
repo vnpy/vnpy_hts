@@ -1,3 +1,5 @@
+"""顶点 HTS 期权接口常量。"""
+
 DFITCSEC_BT_Stock = 0
 DFITCSEC_BT_SOP = 1
 DFITCSEC_BT_FASL = 2

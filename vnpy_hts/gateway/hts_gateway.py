@@ -1,3 +1,5 @@
+"""实现顶点 HTS 期权交易接口。"""
+
 from typing import Any
 from datetime import datetime
 from copy import copy
@@ -237,7 +239,7 @@ class HtsGateway(BaseGateway):
 
 
 class HtsMdApi(MdApi):
-    """"""
+    """对接顶点 HTS 期权柜台的行情接口。"""
 
     def __init__(self, gateway: HtsGateway) -> None:
         """构造函数"""
@@ -399,7 +401,7 @@ class HtsMdApi(MdApi):
 
 
 class HtsTdApi(TdApi):
-    """"""
+    """对接顶点 HTS 期权柜台的交易接口。"""
 
     def __init__(self, gateway: HtsGateway) -> None:
         """构造函数"""
