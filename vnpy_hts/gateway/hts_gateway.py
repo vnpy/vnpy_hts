@@ -1,5 +1,6 @@
 """实现顶点 HTS 期权交易接口。"""
 
+from collections.abc import Callable
 from typing import cast
 from datetime import datetime
 from copy import copy
@@ -106,7 +107,7 @@ COMPRESS_VT2HTS: dict[str, int] = {
 }
 
 # 其他常量
-CHINA_TZ = ZoneInfo("Asia/Shanghai")       # 中国时区
+CHINA_TZ: ZoneInfo = ZoneInfo("Asia/Shanghai")       # 中国时区
 
 # 合约数据全局缓存字典
 symbol_contract_map: dict[str, ContractData] = {}
@@ -228,7 +229,7 @@ class HtsGateway(BaseGateway):
             return
         self.count = 0
 
-        func = self.query_functions.pop(0)
+        func: Callable[[], None] = self.query_functions.pop(0)
         func()
         self.query_functions.append(func)
 
@@ -730,6 +731,8 @@ class HtsTdApi(TdApi):
     def cancel_order(self, req: CancelRequest) -> None:
         """委托撤单"""
         self.reqid += 1
+        sessionid: str
+        localid: str
         sessionid, localid = req.orderid.split("_")
 
         hts_req: dict = {
