@@ -1,6 +1,6 @@
 """实现顶点 HTS 期权交易接口。"""
 
-from typing import Any
+from typing import cast
 from datetime import datetime
 from copy import copy
 
@@ -119,19 +119,20 @@ class HtsGateway(BaseGateway):
 
     default_name: str = "HTS"
 
-    default_setting: dict[str, Any] = {
+    # 行情协议、采集类型、行情压缩是 list[str]，不在基类 default_setting 的值类型中。
+    default_setting: dict[str, str | int | float | bool] = {
         "账号": "",
         "密码": "",
         "行情地址": "",
         "交易地址": "",
-        "行情协议": ["TCP", "UDP"],
+        "行情协议": ["TCP", "UDP"],  # type: ignore[dict-item]
         "授权码": "",
         "产品号": "",
-        "采集类型": ["顶点", "恒生", "金证", "金仕达"],
-        "行情压缩": ["N", "Y"],
+        "采集类型": ["顶点", "恒生", "金证", "金仕达"],  # type: ignore[dict-item]
+        "行情压缩": ["N", "Y"],  # type: ignore[dict-item]
     }
 
-    exchanges: list[Exchange] = list(EXCHANGE_VT2HTS.keys())
+    exchanges: list[Exchange] = list(EXCHANGE_HTS2VT.values())
 
     def __init__(self, event_engine: EventEngine, gateway_name: str) -> None:
         """构造函数"""
@@ -341,7 +342,7 @@ class HtsMdApi(MdApi):
         tick.ask_volume_4 = data["askQty4"]
         tick.ask_volume_5 = data["askQty5"]
 
-        contract: ContractData = symbol_contract_map.get(tick.symbol, None)
+        contract: ContractData | None = symbol_contract_map.get(tick.symbol, None)
         if contract:
             tick.name = contract.name
 
@@ -514,7 +515,7 @@ class HtsTdApi(TdApi):
         )
 
         # 获取缓存的委托信息
-        order: OrderData = self.orders.get(orderid, None)
+        order: OrderData | None = self.orders.get(orderid, None)
         if not order:
             return
 
@@ -536,7 +537,7 @@ class HtsTdApi(TdApi):
         if trade.offset == Offset.CLOSE:
             hedge_direction: int = HEDGE_DIRECTION[data["entrustDirection"]]
             trade_symbol: str = f"{data['securityID']}_{hedge_direction}"
-            pos: PositionData = self.positions.get(trade_symbol, None)
+            pos: PositionData | None = self.positions.get(trade_symbol, None)
 
             if not pos:
                 return
@@ -578,7 +579,7 @@ class HtsTdApi(TdApi):
             localid: str = str(error["localOrderID"])
             sessionid: str = str(error["sessionID"])
             orderid: str = f"{sessionid}_{localid}"
-            order: OrderData = self.orders.get(orderid, None)
+            order: OrderData | None = self.orders.get(orderid, None)
 
             if order:
                 dt: datetime = datetime.now()
@@ -616,7 +617,7 @@ class HtsTdApi(TdApi):
         )
 
         contract.option_index = get_option_index(
-            contract.option_strike, data["contractID"]
+            cast(float, contract.option_strike), data["contractID"]
         )
 
         symbol_contract_map[contract.symbol] = contract
