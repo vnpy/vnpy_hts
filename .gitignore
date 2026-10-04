@@ -40,3 +40,6 @@ x64/
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
+
+# Untagged prebuilt extensions shadow the meson build
+vnpy_hts/api/*.pyd

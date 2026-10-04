@@ -38,7 +38,7 @@ jobs:
 
       - name: Install ta-lib
         run: |
-          uv pip install "ta-lib==0.6.4" --index https://pypi.vnpy.com --system
+          python -m pip install "ta-lib==0.6.4" --index-url https://pypi.vnpy.com
           python -m pip install "vnpy==4.4.0"
 
       - name: Lint
@@ -46,6 +46,11 @@ jobs:
 
       - name: Type check
         run: mypy vnpy_hts
+
+      - name: Install Visual C++ 2013 runtime
+        run: |
+          curl.exe -fsSL -o "$env:RUNNER_TEMP\vcredist2013_x64.exe" https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe
+          Start-Process -FilePath "$env:RUNNER_TEMP\vcredist2013_x64.exe" -ArgumentList "/install","/quiet","/norestart" -Wait
 
       - name: Build and install
         run: |
